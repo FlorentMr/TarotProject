@@ -13,23 +13,70 @@ import javafx.scene.image.ImageView;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
-public class Carte {
-    int x, y, z;
+public class Carte extends Modele{
+    int X, Y, Z;
     ImageView devant = new ImageView();
     ImageView dos = new ImageView();
-    static Image imageDos = new Image("file:./ressources/cache.jpg");
+    static Image imageDevant = new Image("file:./ressources/cache.jpg");
     static long halfFlipDuration = 1000;
+    String fichierName;
+
+    Carte(){}
 
     Carte(int x, int y, int z, String fichier){
-        Image imageDevant = new Image("file:./ressources/"+fichier);
+        Image imageDos = new Image("file:./ressources/"+fichier);
         devant.setImage(imageDevant);
+
+        dos.setImage(imageDos);
+
+        fichierName=fichier;
+    }
+
+    public void setTranslation(int x, int y, int z){
         devant.setTranslateX(x);
         devant.setTranslateY(y);
         devant.setTranslateZ(z);
-        dos.setImage(imageDos);
+
         dos.setTranslateX(x);
         dos.setTranslateY(y);
         dos.setTranslateZ(z);
+    }
+
+    public String image () {return fichierName;}
+
+    public enum Value {
+        AS(1),
+        DEUX(2),
+        TROIS(3),
+        QUATRE(4),
+        CINQ(5),
+        SIX(6),
+        SEPT(7),
+        HUIT(8),
+        NEUF(9),
+        DIX(10),
+        VALET(11),
+        CAVALIER(12),
+        DAME(13),
+        ROI(14);
+
+        public final int value;
+        Value(int c) {
+            value = c;
+        }
+       // private int getValue(){return (int)Value.;}
+    }
+
+    public enum Suit {
+        TREFLES('T'),
+        PIQUES('P'),
+        CARREAUX('K'), //Pour ne pas avoir de problème d'identification par symbole entre "Coeur" et "Carreau", on donne à ce dernier la valeur 'K'
+        COEURS('C');
+
+        public final char symbol;
+        Suit(char c) {
+            symbol = c;
+        }
     }
 
     Collection<Node> getNodes(){
@@ -52,7 +99,7 @@ public class Carte {
         rotateInBack.setFromAngle(-90);
         rotateInBack.setToAngle(0);
         //
-        return new SequentialTransition(rotateOutFront, rotateInBack);
+        return new SequentialTransition(rotateInBack, rotateOutFront);
     }
 
 }

@@ -3,6 +3,8 @@ package com.tarot;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
+
 import javafx.animation.Interpolator;
 import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
@@ -51,24 +53,41 @@ import javafx.scene.transform.Rotate;
 }*/
 
 public class Main extends Application {
+    public final static int xMain=50;
+    public final static int yMain=500;
+    public final static int zMain=200;
     @Override
-    public void start(Stage fenetre) {
-        Carte carte = new Carte(512-(271/2),200,200,"5.jpg");
+
+    public void start(Stage fenetre) throws InterruptedException {
+        Carte carte = new Carte();
+        Deck deck = new Deck();
+        ArrayList<Carte> carteAnimer = new ArrayList<Carte>();
+
 
 
         // scene graphique
         fenetre.setTitle("Let's play Tarot !");
         Group cartes = new Group();
+
+        for (int i=0;i<16;i++)
+        {
+            carte=deck.piocheCarte();
+            carte.setTranslation(i*xMain+100,yMain,200);
+            cartes.getChildren().addAll(carte.getNodes());
+            carteAnimer.add(carte);
+        }
+
         Scene plateau = new Scene(cartes,1024,768);
         plateau.setFill(Color.BLACK);
 
-        cartes.getChildren().addAll(carte.getNodes());
         fenetre.setScene(plateau);
         fenetre.sizeToScene();
         fenetre.show();
 
         // animation
-        carte.flip().play();
+        for (int i=0;i<16;i++) {
+            carteAnimer.get(i).flip().play();
+        }
 
     }
 
