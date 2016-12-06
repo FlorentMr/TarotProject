@@ -17,11 +17,11 @@ public class Carte {
     int x, y, z;
     ImageView devant = new ImageView();
     ImageView dos = new ImageView();
-    static Image imageDos = new Image("file:./resources/272px-Tarot_nouveau_-_Grimaud_-_1898_-_Back_side.jpg");
+    static Image imageDos = new Image("file:./ressources/cache.jpg");
     static long halfFlipDuration = 1000;
 
     Carte(int x, int y, int z, String fichier){
-        Image imageDevant = new Image("file:./resources/271px-Tarot_nouveau_-_Grimaud_-_1898_-"+fichier);
+        Image imageDevant = new Image("file:./ressources/"+fichier);
         devant.setImage(imageDevant);
         devant.setTranslateX(x);
         devant.setTranslateY(y);

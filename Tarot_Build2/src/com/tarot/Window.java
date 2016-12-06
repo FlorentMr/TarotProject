@@ -24,7 +24,7 @@ public class Window extends Vue {
         frame = new JFrame("FrameDemo");
         frame.setSize(800,600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.getContentPane().add(emptyLabel, BorderLayout.CENTER);
+//      frame.getContentPane().add(emptyLabel, BorderLayout.CENTER);
         frame.pack();
         frame.setVisible(true);
     }
